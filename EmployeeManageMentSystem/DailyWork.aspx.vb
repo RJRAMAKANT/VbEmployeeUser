@@ -1,4 +1,4 @@
-﻿Imports System.Net
+Imports System.Net
 Imports System.Web.Script.Serialization
 Imports System.Data
 Imports System.Configuration
@@ -15,7 +15,7 @@ Partial Class DailyWork
     Dim Sql As String
     Dim Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
     Public firstname, lastname As String
-    Public userid As String
+    Public userid As Integer
     Public todayswork As String
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("MySession") Is Nothing Then
@@ -35,6 +35,9 @@ Partial Class DailyWork
                 Text_daily_eday.Text = Date.Today.DayOfWeek.ToString()
                 dailyWork_details.Text = todayswork
                 LoadGridViewData()
+
+                'LoadTableData()
+                'gridpanel.Visible = True
             End If
 
         End If
@@ -75,9 +78,10 @@ Partial Class DailyWork
             Con.Close() ' Close connection after use
 
             If rowlength > 0 Then
+                'GridView1.DataBind()
                 ClientScript.RegisterStartupScript(Me.GetType(), "ShowMessage", "alert('WorkDetails Updated');", True)
                 'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Toastr", "toastr.success('WorkDetails Updated successfully!');", True)
-                
+
 
             Else
                 ClientScript.RegisterStartupScript(Me.GetType(), "ShowMessage", "alert('Update Failed');", True)
@@ -108,6 +112,7 @@ Partial Class DailyWork
             Con.Close() ' Close connection after use
 
             If rowlength > 0 Then
+
                 ClientScript.RegisterStartupScript(Me.GetType(), "ShowMessage", "alert('WorkDetails Saved');", True)
 
             Else
@@ -115,7 +120,8 @@ Partial Class DailyWork
             End If
         End If
 
-        UpdatePanel1.Update()
+        'LoadTableData()
+        LoadGridViewData()
 
     End Sub
 
@@ -140,12 +146,12 @@ Partial Class DailyWork
     End Sub
 
 
-    Private Sub LoadGridViewData()
+    Public Sub LoadGridViewData()
         Dim query As String = "SELECT id, empname, data, day, work, comment FROM dailywork WHERE id = @userid"
-
+        Dim user = Session("ID")
         Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
             Using Cmd As New MySqlCommand(query, Con)
-                Cmd.Parameters.AddWithValue("@userid", userid)
+                Cmd.Parameters.AddWithValue("@userid", User)
 
                 Con.Open()
 
@@ -156,9 +162,57 @@ Partial Class DailyWork
             End Using
         End Using
     End Sub
-    
 
 
 
+
+    Protected Sub GridView1_Load(sender As Object, e As EventArgs) Handles GridView1.Load
+        LoadGridViewData()
+    End Sub
+
+
+    'Public Sub LoadTableData()
+    '    Dim query As String = "SELECT id, empname, data, day, work, comment FROM dailywork WHERE id = @userid"
+    '    Dim user = Session("ID")
+    '    Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
+    '        Using Cmd As New MySqlCommand(query, Con)
+    '            Cmd.Parameters.AddWithValue("@userid", user)
+
+    '            Con.Open()
+
+    '            ' Create a DataTable to store the data
+    '            Dim dt As New DataTable()
+    '            Using dr As MySqlDataReader = Cmd.ExecuteReader()
+    '                dt.Load(dr)
+    '            End Using
+
+    '            ' Clear the existing rows
+    '            DailyWorkTable.Rows.Clear()
+
+    '            ' Create table header
+    '            Dim headerRow As New TableRow()
+    '            For Each column As DataColumn In dt.Columns
+    '                Dim headerCell As New TableCell()
+    '                headerCell.Text = column.ColumnName
+    '                headerRow.Cells.Add(headerCell)
+    '            Next
+    '            DailyWorkTable.Rows.Add(headerRow)
+
+    '            ' Populate table rows
+    '            For Each row As DataRow In dt.Rows
+    '                Dim tableRow As New TableRow()
+    '                For Each column As DataColumn In dt.Columns
+    '                    Dim tableCell As New TableCell()
+    '                    tableCell.Text = row(column).ToString()
+    '                    tableRow.Cells.Add(tableCell)
+    '                Next
+    '                DailyWorkTable.Rows.Add(tableRow)
+    '            Next
+
+    '            Con.Close()
+    '        End Using
+    '    End Using
+    'End Sub
 
 End Class
+
