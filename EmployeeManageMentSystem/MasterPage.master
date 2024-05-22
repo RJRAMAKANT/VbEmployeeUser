@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
 
 <!DOCTYPE html>
 
@@ -14,18 +14,29 @@
      <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-        .liitem:hover{
-            cursor:pointer;
-            color:red;
-        }
-        a{
-            text-decoration:none;
-            color:white;
-        }
-        a:hover{
-             cursor:pointer;
-            color:red;
-        }
+       .liitem {
+    background-color: #858385;
+    border-radius: 10px;
+}
+       .liitem.hover-effect:hover {
+    background-color: #4CAF50;
+}
+ .button-style {
+    display: block;
+    background-color: #858385;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.button-style.hover-effect:hover {
+    background-color: #4CAF50;
+    color:white;
+}
     </style>
 </head>
 <body>
@@ -46,15 +57,20 @@
             </div>
         </div>
           <div class="text-center mt-3 " style="font-weight:bold;">
-              <a href="DashBorad.aspx"><div style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2  liitem">Dashboard</div></a>
-              <div  style="background-color:#858385;border-radius:10px;"class="p-2 mt-2 liitem">Apply Leave</div>
-              <a href="Calander.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Calander</div></a>
-              <div  style="background-color:#858385;border-radius:10px;"class="p-2 mt-2 liitem">Holiday List</div>
-              <a href="DailyWork.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Daily Work</div></a>
-              <div  style="background-color:#858385;border-radius:10px;"class="p-2 mt-2 liitem">Pay Roll</div>
-              <div  style="background-color:#858385;border-radius:10px;"class="p-2 mt-2 liitem">Profile</div>
-              <div  style="background-color:#858385;border-radius:10px;"class="p-2 mt-2 liitem">Update Profile</div>
-              <a href="LoginForm.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Sign Out</div></a>
+              <%--<a href="DashBorad.aspx"><div style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2  liitem">Dashboard</div></a>--%>
+              <a href="DashBorad.aspx" class="button-style hover-effect">Dashboard</a>
+              <div  class="p-2 mt-2 liitem hover-effect">Apply Leave</div>
+              <%--<a href="Calander.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Calander</div></a>--%>
+              <a href="Calander.aspx" class="button-style hover-effect">Calander</a>
+
+              <div  class="p-2 mt-2 liitem hover-effect">Holiday List</div>
+             <%-- <a href="DailyWork.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Daily Work</div></a>--%>
+              <a href="DailyWork.aspx" class="button-style hover-effect">Daily Work</a>
+              <div class="p-2 mt-2 liitem hover-effect">Pay Roll</div>
+              <div class="p-2 mt-2 liitem hover-effect">Profile</div>
+              <div  class="p-2 mt-2 liitem hover-effect">Update Profile</div>
+             <%-- <a href="LoginForm.aspx"><div  style="background-color:#858385;border-radius:10px; color:white;"class="p-2 mt-2 liitem">Sign Out</div></a>--%>
+              <a href="LoginForm.aspx" class="button-style hover-effect">Sign Out</a>
           </div>
         </div>
         <div class="col-10 ">
@@ -65,13 +81,15 @@
                 <div class="ml-5"><asp:Button ID="logout_button" runat="server" Text="Sign Out" CssClass="btn btn-warning" /></div>
                 
             </div>
-                <div>
+                <div style="overflow-y:scroll;">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
+               
             </form>
         </div>
     </div>
+         <div style="height:40px;text-align:center; background-color: #01001f; color:red;font-weight:bold; border-radius:10px;position:fixed;bottom:0; width:100%;z-index: 1000;">Copyright © 2024. Rj Ramakant.</div>
 
     </div>
 
