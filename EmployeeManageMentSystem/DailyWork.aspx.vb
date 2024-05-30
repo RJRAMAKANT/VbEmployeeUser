@@ -17,6 +17,7 @@ Partial Class DailyWork
     Public firstname, lastname As String
     Public userid As Integer
     Public todayswork As String
+    Public tearn As Integer
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("MySession") Is Nothing Then
 
@@ -112,7 +113,7 @@ Partial Class DailyWork
             Con.Close() ' Close connection after use
 
             If rowlength > 0 Then
-
+                updateMoney()
                 ClientScript.RegisterStartupScript(Me.GetType(), "ShowMessage", "alert('WorkDetails Saved');", True)
 
             Else
@@ -170,49 +171,65 @@ Partial Class DailyWork
         LoadGridViewData()
     End Sub
 
+Public Sub TotalEarning()
+        Dim user = Session("ID")
+        Dim query As String = "SELECT totalearn FROM employee11 WHERE id = @userid"
+        Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
+            Using Cmd As New MySqlCommand(query, Con)
+                Cmd.Parameters.AddWithValue("@userid", user)
 
-    'Public Sub LoadTableData()
-    '    Dim query As String = "SELECT id, empname, data, day, work, comment FROM dailywork WHERE id = @userid"
-    '    Dim user = Session("ID")
-    '    Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
-    '        Using Cmd As New MySqlCommand(query, Con)
-    '            Cmd.Parameters.AddWithValue("@userid", user)
+                Con.Open()
+                Using dr As MySqlDataReader = Cmd.ExecuteReader()
+                    If dr.Read() Then
+                        tearn = Convert.ToInt32(dr("totalearn"))
+                    End If
+                End Using
+            End Using
+        End Using
+    End Sub
 
-    '            Con.Open()
 
-    '            ' Create a DataTable to store the data
-    '            Dim dt As New DataTable()
-    '            Using dr As MySqlDataReader = Cmd.ExecuteReader()
-    '                dt.Load(dr)
-    '            End Using
 
-    '            ' Clear the existing rows
-    '            DailyWorkTable.Rows.Clear()
+   Public Sub updateMoney()
+        Dim money As Integer
+        Dim user = Session("ID")
 
-    '            ' Create table header
-    '            Dim headerRow As New TableRow()
-    '            For Each column As DataColumn In dt.Columns
-    '                Dim headerCell As New TableCell()
-    '                headerCell.Text = column.ColumnName
-    '                headerRow.Cells.Add(headerCell)
-    '            Next
-    '            DailyWorkTable.Rows.Add(headerRow)
+        Dim query As String = "SELECT DecryptStringWithoutKey(salary) AS salary FROM employee11 WHERE id = @userid"
+        Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
+            Using Cmd As New MySqlCommand(query, Con)
 
-    '            ' Populate table rows
-    '            For Each row As DataRow In dt.Rows
-    '                Dim tableRow As New TableRow()
-    '                For Each column As DataColumn In dt.Columns
-    '                    Dim tableCell As New TableCell()
-    '                    tableCell.Text = row(column).ToString()
-    '                    tableRow.Cells.Add(tableCell)
-    '                Next
-    '                DailyWorkTable.Rows.Add(tableRow)
-    '            Next
+                Cmd.Parameters.AddWithValue("@userid", user)
 
-    '            Con.Close()
-    '        End Using
-    '    End Using
-    'End Sub
+                Con.Open()
+                Using dr As MySqlDataReader = Cmd.ExecuteReader()
+                    If dr.Read() Then
+                        money = Convert.ToInt32(dr("salary"))
+                    End If
+                End Using
+            End Using
+
+            ' Calculate the number of days in the current month
+            Dim currentDate As DateTime = DateTime.Now
+            Dim currentYear As Integer = currentDate.Year
+            Dim currentMonth As Integer = currentDate.Month
+            Dim daysInCurrentMonth As Integer = DateTime.DaysInMonth(currentYear, currentMonth)
+
+            ' Calculate the daily money
+            Dim DailyMoney As Integer = money / daysInCurrentMonth
+            TotalEarning()
+            ' Update the total earnings in the database
+            Dim query1 As String = "UPDATE employee11 SET totalearn = @tearn + @DailyMoney WHERE id = @userid"
+
+            Using Cmd As New MySqlCommand(query1, Con)
+                Cmd.Parameters.AddWithValue("@userid", user)
+                Cmd.Parameters.AddWithValue("@DailyMoney", DailyMoney)
+                Cmd.Parameters.AddWithValue("@tearn", tearn)
+                'Con.Open()
+                Cmd.ExecuteNonQuery()
+                Con.Close()
+            End Using
+        End Using
+    End Sub
 
 End Class
 
