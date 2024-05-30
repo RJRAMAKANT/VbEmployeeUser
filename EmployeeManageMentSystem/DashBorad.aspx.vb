@@ -1,4 +1,4 @@
-﻿Imports System.Net
+Imports System.Net
 Imports System.Web.Script.Serialization
 Imports System.Data
 Imports System.Configuration
@@ -17,6 +17,7 @@ Partial Class DashBorad
     Public userid As String
     Public workcount As Integer
     Public Leaves As Integer
+    Public tearn As String
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("MySession") Is Nothing Then
 
@@ -26,15 +27,15 @@ Partial Class DashBorad
                 userId = Session("ID")
                 firstname = Session("FirstName")
                 lastname = Session("LastName")
+                TotalEarning()
                 LoadLeave()
                 Leave_label.Text = Leaves
                 holiday_year.Text = Date.Today().ToString("yyyy")
-                updateaddress_name.Text = firstname + " " + lastname
+                updateaddress_name.Text = tearn
                 Loadwork()
-
-
-
-
+                Alldetails()
+                graphpanel.Visible = True
+                GetDataForYear()
             End If
 
         End If
@@ -80,6 +81,27 @@ Partial Class DashBorad
         dr.Close()
         Con.Close()
     End Sub
+    Public Sub TotalEarning()
+
+        Dim query As String = "SELECT totalearn FROM employee11 WHERE id ='" + userid + "'"
+        Cmd.CommandText = query
+        'Cmd.Parameters.AddWithValue("@userid", userid)
+        Cmd.Connection = Con
+
+        Con.Open()
+        dr = Cmd.ExecuteReader()
+
+        If dr.Read() Then
+            tearn = Convert.ToInt32(dr("totalearn"))
+
+        End If
+
+        dr.Close()
+        Con.Close()
+
+    End Sub
+
+
 
 
 
@@ -118,5 +140,142 @@ Partial Class DashBorad
     '        TextBox2.Text = "Error occurred: " & ex.Message
     '    End Try
     'End Sub
+
+    Protected Sub profilebtn_Click(sender As Object, e As EventArgs) Handles profilebtn.Click
+        profilepanel.Visible = True
+        contactpanel.Visible = False
+        projectpanel.Visible = False
+        graphpanel.Visible = True
+    End Sub
+
+
+    Protected Sub contactbtn_Click(sender As Object, e As EventArgs) Handles contactbtn.Click
+        profilepanel.Visible = False
+        contactpanel.Visible = True
+        projectpanel.Visible = False
+        graphpanel.Visible = True
+    End Sub
+
+    Protected Sub projectbtn_Click(sender As Object, e As EventArgs) Handles projectbtn.Click
+        profilepanel.Visible = False
+        contactpanel.Visible = False
+        projectpanel.Visible = True
+        graphpanel.Visible = True
+    End Sub
+
+
+
+    Public Sub Alldetails()
+        Dim uuser As String = Session("ID")
+        Dim query As String = "SELECT ID, FirstName, LastName, Email, PhoneNumber, Department, HireDate, DecryptStringWithoutKey(salary) as ssal, DOB, Gender, Address, About, leaves, status, totalearn, designation, manager, Project FROM employee11 WHERE id = @userid1"
+        Cmd.CommandText = query
+        Cmd.Parameters.AddWithValue("@userid1", uuser)
+        Cmd.Connection = Con
+
+        Con.Open()
+        dr = Cmd.ExecuteReader()
+
+        If dr.Read() Then
+
+            empid.Text = dr("ID").ToString()
+            namelabel.Text = dr("FirstName").ToString() & " " & dr("LastName").ToString()
+            dsglabel.Text = dr("designation").ToString
+            aboutlabel.Text = dr("About").ToString
+            dptlabel.Text = dr("Department").ToString
+            cempidlabel.Text = dr("ID").ToString()
+            cempnamelabel.Text = dr("FirstName").ToString() & " " & dr("LastName").ToString()
+            emailLabel.Text = dr("Email").ToString()
+            phoneNumberLabel.Text = dr("PhoneNumber").ToString()
+            pemplabel.Text = dr("ID").ToString()
+            pempnamelabel.Text = dr("FirstName").ToString() & " " & dr("LastName").ToString()
+            'departmentLabel.Text = dr("Department").ToString()
+            hireDateLabel.Text = Convert.ToDateTime(dr("HireDate")).ToString("yyyy-MM-dd")
+            Dim sal As Integer = Convert.ToInt32(dr("ssal"))
+            salaryLabel.Text = sal
+            doblabel.Text = Convert.ToDateTime(dr("DOB")).ToString("yyyy-MM-dd")
+            genderlabel.Text = dr("Gender").ToString()
+            addresslabel.Text = dr("Address").ToString()
+
+            statusLabel.Text = dr("status").ToString()
+            'designationLabel.Text = dr("designation").ToString()
+            managerLabel.Text = dr("manager").ToString()
+            projectLabel.Text = dr("Project").ToString()
+        End If
+
+        dr.Close()
+        Con.Close()
+
+    End Sub
+
+
+ Public Sub GetDataForYear()
+        ' Dim connectionString As String = ConfigurationManager.ConnectionStrings("local").ConnectionString
+
+        Dim curentyear As String = DateTime.Now.Year.ToString()
+        Dim query As String = "SELECT " & _
+                        "CASE MONTH(dates.month_date) " & _
+                        "    WHEN 1 THEN 'Jan' " & _
+                        "    WHEN 2 THEN 'Feb' " & _
+                        "    WHEN 3 THEN 'Mar' " & _
+                        "    WHEN 4 THEN 'Apr' " & _
+                        "    WHEN 5 THEN 'May' " & _
+                        "    WHEN 6 THEN 'Jun' " & _
+                        "    WHEN 7 THEN 'Jul' " & _
+                        "    WHEN 8 THEN 'Aug' " & _
+                        "    WHEN 9 THEN 'Sep' " & _
+                        "    WHEN 10 THEN 'Oct' " & _
+                        "    WHEN 11 THEN 'Nov' " & _
+                        "    WHEN 12 THEN 'Dec' " & _
+                        "    ELSE 'Unknown' " & _
+                        "END AS MonthName, " & _
+                        "COALESCE(COUNT(dailywork.data), 0) AS WorkingDays " & _
+                        "FROM ( " & _
+                        "    SELECT '2024-01-01' + INTERVAL (n-1) MONTH AS month_date " & _
+                        "    FROM ( " & _
+                        "        SELECT 1 AS n " & _
+                        "        UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL " & _
+                        "        SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL " & _
+                        "        SELECT 11 UNION ALL SELECT 12 " & _
+                        "    ) AS months " & _
+                        ") AS dates " & _
+                        "LEFT JOIN demo.dailywork ON MONTH(dates.month_date) = MONTH(STR_TO_DATE(dailywork.data, '%d-%m-%Y')) AND YEAR(dates.month_date) = '" + curentyear + "' " & _
+                        "GROUP BY MONTH(dates.month_date) " & _
+                        "ORDER BY MONTH(dates.month_date)"
+
+        Cmd.CommandText = query
+        Cmd.Connection = Con
+
+        Con.Open()
+        dr = Cmd.ExecuteReader()
+
+        If dr.HasRows Then
+            Dim dt As New DataTable()
+            dt.Load(dr)
+
+            ' Populate data into ASP table
+            For Each row As DataRow In dt.Rows
+                Dim monthName As String = row("MonthName").ToString()
+                Dim workingDays As Integer = Convert.ToInt32(row("WorkingDays"))
+
+                Dim tr As New TableRow()
+                Dim tcMonthName As New TableCell()
+                Dim tcWorkingDays As New TableCell()
+
+                tcMonthName.Text = monthName
+                tcWorkingDays.Text = workingDays.ToString()
+
+                tr.Cells.Add(tcMonthName)
+                tr.Cells.Add(tcWorkingDays)
+
+                graphtable.Rows.Add(tr)
+            Next
+        Else
+            
+        End If
+
+        Con.Close()
+    End Sub
+
+
 
 End Class
