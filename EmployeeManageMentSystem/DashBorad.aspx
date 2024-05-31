@@ -7,24 +7,36 @@
         /* Bootstrap Icons */
         @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
     </style>
+    <style>
+        .card:hover {
+            transform: translateY(-10px); /* Move the card up slightly on hover */
+            transition: transform 0.2s ease; /* Smooth transition */
+        }
+      
+    .m-2:hover {
+        transform: translateY(-10px); /* Move the card up slightly on hover */
+        transition: transform 0.2s ease; /* Smooth transition */
+    }
 
+    </style>
     <div class="container-fluid mt-2">
         <!-- Card stats -->
-        <div class="row g-6 mb-6">
-            <div class="col-xl-3 col-sm-6 col-12 ">
-                <div class="card shadow border-0 " style="background-color: #01001f;">
+        <div class="row g-6 mb-1 mt-1" style="background-color: #193A4A; padding: 10PX; border-radius: 10px;">
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card shadow border-0" style=" background:linear-gradient(to bottom right, #fe8c00, #f83600);">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <span class="h6 font-semibold text-muted text-md d-block mb-2">Apply Leaves</span>
+                                <span class="h6 font-semibold text-md text-white d-block mb-2">Apply Leaves</span>
                                 <span class="h3 font-bold mb-0">
                                     <h3>
-                                        <asp:Label runat="server" ForeColor="Gray" ID="Leave_label" Text="label"></asp:Label></h3>
+                                        <asp:Label runat="server" ForeColor="white" ID="Leave_label" Text="label"></asp:Label>
+                                    </h3>
                                 </span>
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                    <%--  <i class="bi bi-people""></i>--%>
+                                     <i class="bi bi-people"></i> 
                                 </div>
                             </div>
                         </div>
@@ -32,18 +44,18 @@
                             <span class="badge badge-pill bg-soft-success text-success me-2">
                                 <i class="bi bi-arrow-up me-1"></i>
                             </span>
-                            <span class="text-nowrap text-md text-muted">Total Leave Available</span>
+                            <span class="text-white text-md">Total Leave Available</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 col-12">
                 <a href="DailyWork.aspx">
-                    <div class="card shadow border-0" style="background-color: #01001f;">
+                    <div class="card shadow border-0" style=" background:linear-gradient(to bottom right, #00d2ff, #3a7bd5);">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <span class="h6 font-semibold text-muted text-md d-block mb-2">Enter Dailywork</span>
+                                    <span class="h6 font-semibold  text-md d-block mb-2">Enter Dailywork</span>
                                     <span class="h3 font-bold mb-0"><%=workcount%></span>
                                 </div>
                                 <div class="col-auto">
@@ -56,20 +68,20 @@
                                 <span class="badge badge-pill bg-soft-success text-success me-2">
                                     <i class="bi bi-arrow-up me-1"></i>
                                 </span>
-                                <span class="text-nowrap text-md text-muted">Click Here</span>
+                                <span class="text-nowrap text-md ">Click Here</span>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card shadow border-0" style="background-color: #01001f;">
+                <div class="card shadow border-0" style="background:linear-gradient(to bottom right, #d53a7b, #d5943a);">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <span class="h6 font-semibold text-muted text-md d-block mb-2" style="color: white; font-weight: bold;">Total Earning</span>
+                                <span class="h6 font-semibold  text-md d-block mb-2" style="color: white; font-weight: bold;">Total Earning</span>
                                 <span class="h3 font-bold mb-0">
-                                    <asp:Label runat="server" ForeColor="gray" ID="updateaddress_name"></asp:Label></span>
+                                    <asp:Label runat="server" ForeColor="white" ID="updateaddress_name"></asp:Label></span>
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
@@ -87,11 +99,11 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card shadow border-0" style="background-color: #01001f;">
+                <div class="card shadow border-0" style="background:linear-gradient(to bottom right, #918be7, #e78be1);">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Holdiday List</span>
+                                <span class="h6 font-semibold text-sm d-block mb-2">Holdiday List</span>
                                 <span class="h3 font-bold mb-0">100%</span>
                             </div>
                             <div class="col-auto">
@@ -117,12 +129,12 @@
         <asp:UpdatePanel ID="updatePanel" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div style="display: grid; grid-template-columns: 5fr 7fr;">
-                    <div style="background-color: #01001f; padding: 10px; border-radius: 15px; height: 69vh;">
+                    <div style="background-color: #193A4A; padding: 10px; border-radius: 15px; height: 67vh;">
                         <div class="phead" style="color: white; text-align: center; background-color: #278f8b; padding: 5px; border-radius: 5px; font-family: Georgia; font-weight: bold; font-size: 22px;">Employee Profile</div>
                         <div class="pimg mt-2" style="text-align: center; border-radius: 50%;">
                             <img src="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png" width="150px" height="150px" />
                         </div>
-                        <div class="pbody mt-5 mb-5" style="height: 350px;">
+                        <div class="pbody mt-5" style="height: 350px;">
                             <asp:Panel runat="server" ID="profilepanel">
                                 <div style="background-color: #177565; color: white; padding: 20px; border-radius: 15px; font-family: 'Arial Rounded MT'">
                                     <table class="w-100">
@@ -239,7 +251,7 @@
                                 </div>
                             </asp:Panel>
                         </div>
-                        <div class="pfooter d-flex w-100 justify-content-around mt-5">
+                        <div class="pfooter d-flex w-100 justify-content-around mt-3">
                             <div>
                                 <asp:Button runat="server" CssClass="btn btn-success" ID="profilebtn" Text="Profile" OnClick="profilebtn_Click" />
                             </div>
@@ -252,59 +264,59 @@
                         </div>
                     </div>
                     <div class=" w-100">
-                       
-                        <asp:Panel runat="server" ID="graphpanel"  Visible="True">
 
-                        <div style="background-color: white; height: 400px; border-radius: 15px; margin-left: 10px;">
-                            <div style="border-color:#177565;">
-                                <figure class="highcharts-figure">
-                                    <div id="container"></div>
+                        <asp:Panel runat="server" ID="graphpanel" Visible="True">
 
-                                    <div id="sliders">
-                                        <table style="display:none;">
-                                            <tr>
-                                                <td>
-                                                    <label for="alpha">Alpha Angle</label></td>
-                                                <td>
-                                                    <input id="alpha" type="range" min="0" max="45" value="15" />
-                                                    <span id="alpha-value" class="value"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="beta">Beta Angle</label></td>
-                                                <td>
-                                                    <input id="beta" type="range" min="-45" max="45" value="90" />
-                                                    <span id="beta-value" class="value"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="depth">Depth</label></td>
-                                                <td>
-                                                    <input id="depth" type="range" min="20" max="100" value="50" />
-                                                    <span id="depth-value" class="value"></span></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </figure>
+                            <div style="background-color: white; height: 400px; border-radius: 15px; margin-left: 10px;">
+                                <div style="border-color: #177565;">
+                                    <figure class="highcharts-figure">
+                                        <div id="container"></div>
+
+                                        <div id="sliders">
+                                            <table style="display: none;">
+                                                <tr>
+                                                    <td>
+                                                        <label for="alpha">Alpha Angle</label></td>
+                                                    <td>
+                                                        <input id="alpha" type="range" min="0" max="45" value="15" />
+                                                        <span id="alpha-value" class="value"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="beta">Beta Angle</label></td>
+                                                    <td>
+                                                        <input id="beta" type="range" min="-45" max="45" value="90" />
+                                                        <span id="beta-value" class="value"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="depth">Depth</label></td>
+                                                    <td>
+                                                        <input id="depth" type="range" min="20" max="100" value="50" />
+                                                        <span id="depth-value" class="value"></span></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </figure>
+                                </div>
+
+
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center p-1 mt-5">
+
+                                <div class="m-2" style="height: 205px; width: 100%; background-color: #193A4A; border-radius: 15px;">
+                                    <div class="text-center" style="font-weight: bold; color: white;">UPCOMING HOLIDAY</div>
+                                </div>
+                                <div class="m-2" style="height: 205px; background-color: #193A4A; width: 100%; border-radius: 15px;">
+                                    <div class="text-center" style="font-weight: bold; color: white;">PAYROLL</div>
+                                </div>
                             </div>
 
 
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center p-1 mt-5">
-
-                            <div class="m-2" style="height:205px; width:100%;background-color: #01001f; border-radius:15px;">
-                                <div class="text-center" style="font-weight:bold; color:red;">UPCOMING HOLIDAY</div>
-                            </div>
-                            <div class="m-2" style="height:205px;background-color: #01001f;width:100%;border-radius:15px;" >
-                                <div class="text-center" style="font-weight:bold; color:red;">PAY ROLL</div>
-                            </div>
-                        </div>
 
 
-
-
-</asp:Panel>
+                        </asp:Panel>
 
 
                     </div>
@@ -319,8 +331,10 @@
 
 
 
-        <div style="display:none;"><asp:Table ID="graphtable" runat="server"></asp:Table></div>
-        
+        <div style="display: none;">
+            <asp:Table ID="graphtable" runat="server"></asp:Table>
+        </div>
+
 
     </div>
 
@@ -338,16 +352,13 @@
         .highcharts-data-table table {
             min-width: 400px;
             max-width: 800px;
-            margin: 1em auto;
+            margin: 1em;
         }
 
-        #sliders td input[type="range"] {
-            display: inline;
+        #sl n nge"] { display: i l
         }
 
-        #sliders td {
-            padding-right: 1em;
-            white-space: nowrap;
+        #sl padding ri h white-s ace:
         }
     </style>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -357,7 +368,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 
-   <%-- <script>
+    <%-- <script>
         const chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container',
@@ -433,115 +444,123 @@
     </script>--%>
 
 
-<script>
-    // Initialize chart variable
-    let chart;
+    <script>
+        // Initialize chart variable
+        let chart;
 
-    var table = document.getElementById("<%= graphtable.ClientID %>");
-    var monthArray = [];
-    var dayArray = [];
+        var table = document.getElementById("<%= graphtable.ClientID %>");
+        var monthArray = [];
+        var dayArray = [];
 
-    // Loop through each row of the table
-    for (var i = 0; i < table.rows.length; i++) {
-        var cells = table.rows[i].cells;
-        var month = cells[0].innerText.trim();
-        var day = parseInt(cells[1].innerText.trim()); // Convert day to integer
-        // Push month and day data into respective arrays
-        monthArray.push(month);
-        dayArray.push(day);
-    }
+        // Loop through each row of the table
+        for (var i = 0; i < table.rows.length; i++) {
+            var cells = table.rows[i].cells;
+            var month = cells[0].innerText.trim();
+            var day = parseInt(cells[1].innerText.trim()); // Convert day to integer
+            // Push month and day data into respective arrays
+            monthArray.push(month);
+            dayArray.push(day);
+        }
 
-    // Output the arrays
-    console.log("Months: ", monthArray);
-    console.log("Days: ", dayArray);
+        // Output the arrays
+        console.log("Months: ", monthArray);
+        console.log("Days: ", dayArray);
 
-    // Function to initialize Highcharts chart
-    function initializeHighcharts() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                type: 'column',
-                options3d: {
-                    enabled: true,
-                    alpha: 0,
-                    beta: 0,
-                    depth: 0,
-                    viewDistance: 25
-                }
-            },
-            xAxis: {
-                categories: monthArray,
-                gridLineWidth: 0, // Set gridLineWidth to 0 to hide the grid lines
-                minorGridLineWidth: 0 // Set minorGridLineWidth to 0 to hide minor grid lines
-            },
-            yAxis: {
+        // Function to initialize Highcharts chart
+        function initializeHighcharts() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 0,
+                        beta: 0,
+                        depth: 0,
+                        viewDistance: 25
+                    }
+                },
+                xAxis: {
+                    categories: monthArray,
+                    gridLineWidth: 0, // Set gridLineWidth to 0 to hide the grid lines
+                    minorGridLineWidth: 0 // Set minorGridLineWidth to 0 to hide minor grid lines
+                },
+                yAxis: {
+                    title: {
+                        enabled: false
+                    },
+                    gridLineWidth: 0, // Set gridLineWidth to 0 to hide the grid lines
+                    minorGridLineWidth: 0 // Set minorGridLineWidth to 0 to hide minor grid lines
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.key}</b><br>',
+                    pointFormat: 'Worked: {point.y}'
+                },
                 title: {
+                    text: 'Working Day Details',
+                    align: 'top'
+                },
+                subtitle: {
+                    text: '',
+                    align: 'left'
+                },
+                legend: {
                     enabled: false
                 },
-                gridLineWidth: 0, // Set gridLineWidth to 0 to hide the grid lines
-                minorGridLineWidth: 0 // Set minorGridLineWidth to 0 to hide minor grid lines
-            },
-            tooltip: {
-                headerFormat: '<b>{point.key}</b><br>',
-                pointFormat: 'Worked: {point.y}'
-            },
-            title: {
-                text: 'Working Day Details',
-                align: 'center'
-            },
-            subtitle: {
-                text: '',
-                align: 'left'
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                column: {
-                    depth: 25
-                }
-            },
-            series: [{
-                data: dayArray, // Replace static data with dayArray
-                colorByPoint: true
-            }]
+                plotOptions: {
+                    column: {
+                        depth: 25,
+                        dataLabels: {
+                            enabled: true,
+                            inside: true,
+                            format: '{point.y}', // Display the value of each point
+                            style: {
+                                textOutline: 'none' // Remove the outline around the text
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    data: dayArray, // Replace static data with dayArray
+                    colorByPoint: true
+                }]
+            });
+
+            // Show initial values
+            showValues();
+        }
+
+        // Function to show values
+        function showValues() {
+            document.getElementById('alpha-value').innerHTML = chart.options.chart.options3d.alpha;
+            document.getElementById('beta-value').innerHTML = chart.options.chart.options3d.beta;
+            document.getElementById('depth-value').innerHTML = chart.options.chart.options3d.depth;
+        }
+
+        // Function to activate the sliders
+        function activateSliders() {
+            document.querySelectorAll('#sliders input').forEach(input => {
+                input.addEventListener('input', e => {
+                    chart.options.chart.options3d[e.target.id] = parseFloat(e.target.value);
+            showValues();
+            chart.redraw(false);
+        });
+        });
+        }
+
+        // Call initialization function on document ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHighcharts();
+            activateSliders();
         });
 
-        // Show initial values
-        showValues();
-    }
-
-    // Function to show values
-    function showValues() {
-        document.getElementById('alpha-value').innerHTML = chart.options.chart.options3d.alpha;
-        document.getElementById('beta-value').innerHTML = chart.options.chart.options3d.beta;
-        document.getElementById('depth-value').innerHTML = chart.options.chart.options3d.depth;
-    }
-
-    // Function to activate the sliders
-    function activateSliders() {
-        document.querySelectorAll('#sliders input').forEach(input => {
-            input.addEventListener('input', e => {
-                chart.options.chart.options3d[e.target.id] = parseFloat(e.target.value);
-        showValues();
-        chart.redraw(false);
-    });
-    });
-    }
-
-    // Call initialization function on document ready
-    document.addEventListener('DOMContentLoaded', function() {
-        initializeHighcharts();
-        activateSliders();
-    });
-
-    // Reinitialize Highcharts after each partial postback
-    var prm = Sys.WebForms.PageRequestManager.getInstance();
-    prm.add_endRequest(function() {
-        initializeHighcharts();
-        activateSliders();
-    });
-</script>
+        // Reinitialize Highcharts after each partial postback
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function() {
+            initializeHighcharts();
+            activateSliders();
+        });
+    </script>
 
 </asp:Content>
 
