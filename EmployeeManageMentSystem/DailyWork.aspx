@@ -8,10 +8,10 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="text-center p-4" style="font-weight: bold; font-family: Arial Rounded MT; font-size: 20px;">Enter Your Work Details Here</div>
+                <div class="text-center p-4 text-white accordion mt-2" style="border-radius:10px;font-weight: bold; font-family: Arial Rounded MT; font-size: 20px; background-color:#193A4A;">Enter Your Work Details Here</div>
 
 
-                <div class="w-100" style="background-color: #01001f; color: white; font-weight: bold; border-radius: 20px;">
+                <div class="w-100 mt-2" style="background-color: #193A4A;; color: white; font-weight: bold; border-radius: 20px;">
                     <div class="d-flex justify-content-center p-4 pb-3">
                         <table>
                             <tr>
@@ -56,14 +56,14 @@
 
 
       
-        <asp:GridView ID="GridView1" runat="server" Style="border-radius: 15px; overflow: hidden; text-align: center; border-color: #01001f;" AutoGenerateColumns="False" Width="100%">
+        <asp:GridView ID="GridView1" runat="server" CssClass="table table-border" Style="border-radius: 15px; color:white; font-weight:bold; overflow: hidden; text-align: center; border-color: #01001f;" AutoGenerateColumns="False" Width="100%">
             <Columns>
-                <asp:BoundField DataField="id" HeaderText="ID" />
-                <asp:BoundField DataField="empname" HeaderText="Employee Name" />
-                <asp:BoundField DataField="data" HeaderText="Date" />
-                <asp:BoundField DataField="day" HeaderText="Day" />
-                <asp:BoundField DataField="work" HeaderText="Work" />
-                <asp:BoundField DataField="comment" HeaderText="Comment" />
+                <asp:BoundField DataField="id" HeaderStyle-BackColor="#CA4C44" HeaderText="ID" />
+                <asp:BoundField DataField="empname" HeaderStyle-BackColor="#CA4C44"  HeaderText="Employee Name" />
+                <asp:BoundField DataField="data" HeaderStyle-BackColor="#CA4C44"   HeaderText="Date" />
+                <asp:BoundField DataField="day" HeaderStyle-BackColor="#CA4C44"  HeaderText="Day" />
+                <asp:BoundField DataField="work" HeaderStyle-BackColor="#CA4C44"  HeaderText="Work" />
+                <asp:BoundField DataField="comment" HeaderStyle-BackColor="#CA4C44"  HeaderText="Comment" />
             </Columns>
             <HeaderStyle BackColor="#01001f" ForeColor="white" />
         </asp:GridView>
@@ -75,14 +75,6 @@
     
 
     
-   <%-- <style>
-        .table{
-            border-radius: 15px;
-             overflow: hidden; 
-             text-align: center; 
-             border-color: #01001f;
-              Width="100%";
-        }
-    </style>--%>
+   
 </asp:Content>
 
