@@ -1,3 +1,4 @@
+
 <%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     border-radius: 10px;
 }
        .liitem.hover-effect:hover {
-    background-color: #4CAF50;
+    background-color: #CA4C44;
 }
  .button-style {
     display: block;
@@ -34,12 +35,12 @@
 
 
 .button-style.hover-effect:hover {
-    background-color: #4CAF50;
+    background-color: #CA4C44;
     color:white;
 }
     </style>
 </head>
-<body>
+<body style="background-color:#BACFDA">
     <div >
    <%-- <div class="d-flex justify-content-between " style="background-color: #1a191a; color: white;">
         <div class="p-3">
@@ -50,7 +51,7 @@
         </div>
     </div>--%>
     <div class="row  m-1 " >
-        <div class="col-2" style="background-color: #01001f; color: white; height:95vh; border-radius:10px;" >
+        <div class="col-2" style="background-color: #193A4A; color: white; height:95vh; border-radius:10px;" >
             <div class="p-3 d-flex justify-content-center">
             <div class="">
                 <img src="https://img.freepik.com/free-vector/bird-colorful-gradient-design-vector_343694-2506.jpg?size=626&ext=jpg" height="150px;"width="150px;" style="border-radius:50%;" />
@@ -76,9 +77,9 @@
         <div class="col-10 ">
            
             <form id="form1" runat="server">
-            <div class="w-100 p-2 d-flex  justify-content-between pr-5" style="background-color:#01001f; color:white;border-radius:10px;">
+            <div class="w-100 p-2 d-flex  justify-content-between pr-5" style="background-color:#193A4A; color:white;border-radius:10px;">
                 <div class="mt-2"><h3 class="text-white"><asp:Label ID="username" Font-Bold runat="server" Text="Label"></asp:Label></h3></div>
-                <div class="ml-5"><asp:Button ID="logout_button" runat="server" Text="Sign Out" CssClass="btn btn-warning" /></div>
+                <div class="ml-5"><asp:Button ID="logout_button" runat="server" Text="Sign Out" CssClass="btn btn-danger" /></div>
                 
             </div>
                 <div style="overflow-y:scroll;">
@@ -89,7 +90,7 @@
             </form>
         </div>
     </div>
-         <div style="height:40px;text-align:center; background-color: #01001f; color:red;font-weight:bold; border-radius:10px;position:fixed;bottom:0; width:100%;z-index: 1000;">Copyright © 2024. Rj Ramakant.</div>
+         <div style="height:40px;text-align:center; background-color: #01001f; color:white;font-weight:bold; border-radius:10px;position:fixed;bottom:0; width:100%;z-index: 1000;">Copyright © 2024. Rj Ramakant.</div>
 
     </div>
 
