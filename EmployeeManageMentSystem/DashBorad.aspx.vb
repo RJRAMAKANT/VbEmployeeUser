@@ -165,6 +165,11 @@ Partial Class DashBorad
 
 
 
+
+
+
+
+
     Public Sub Alldetails()
         Dim uuser As String = Session("ID")
         Dim query As String = "SELECT ID, FirstName, LastName, Email, PhoneNumber, Department, HireDate, DecryptStringWithoutKey(salary) as ssal, DOB, Gender, Address, About, leaves, status, totalearn, designation, manager, Project FROM employee11 WHERE id = @userid1"
