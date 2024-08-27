@@ -1,4 +1,4 @@
-Imports System.Data
+﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Threading
 Imports MySql.Data.MySqlClient
@@ -22,7 +22,7 @@ Partial Class MasterPage
                 userid = Session("id")
                 firstname = Session("FirstName")
                 lastname = Session("LastName")
-                username.Text = "WelCome " + firstname + " " + lastname
+                username.Text = "WelCome : Mr. " + firstname + " " + lastname
 
 
             End If

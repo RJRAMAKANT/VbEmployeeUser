@@ -1,10 +1,10 @@
-<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="DailyWork.aspx.vb" Inherits="DailyWork" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="DailyWork.aspx.vb" Inherits="DailyWork" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -55,8 +55,9 @@
         </asp:UpdatePanel>
 
 
-      
-        <asp:GridView ID="GridView1" runat="server" CssClass="table table-border" Style="border-radius: 15px; color:white; font-weight:bold; overflow: hidden; text-align: center; border-color: #01001f;" AutoGenerateColumns="False" Width="100%">
+       
+        <div style="overflow-y:scroll; height:400px;">
+            <asp:GridView ID="GridView1" runat="server" CssClass="table table-border mt-2" Style="border-radius: 15px; color:white; font-weight:bold; overflow: auto; text-align: center; border-color: #01001f;" AutoGenerateColumns="False" Width="100%">
             <Columns>
                 <asp:BoundField DataField="id" HeaderStyle-BackColor="#CA4C44" HeaderText="ID" />
                 <asp:BoundField DataField="empname" HeaderStyle-BackColor="#CA4C44"  HeaderText="Employee Name" />
@@ -67,6 +68,7 @@
             </Columns>
             <HeaderStyle BackColor="#01001f" ForeColor="white" />
         </asp:GridView>
+        </div>
       
 
        <%-- <asp:Table ID="DailyWorkTable" runat="server" CssClass="table table-hover"></asp:Table>--%>

@@ -1,4 +1,4 @@
-Imports System.Net
+﻿Imports System.Net
 Imports System.Web.Script.Serialization
 Imports System.Data
 Imports System.Configuration
@@ -148,7 +148,7 @@ Partial Class DailyWork
 
 
     Public Sub LoadGridViewData()
-        Dim query As String = "SELECT id, empname, data, day, work, comment FROM dailywork WHERE id = @userid"
+        Dim query As String = "SELECT id, empname, data, day, work, comment FROM dailywork WHERE id = @userid ORDER BY SLNO DESC"
         Dim user = Session("ID")
         Using Con As New MySqlConnection(ConfigurationManager.ConnectionStrings("local").ConnectionString)
             Using Cmd As New MySqlCommand(query, Con)

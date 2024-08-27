@@ -20,7 +20,7 @@ Partial Class LoginForm
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "alert", "alert('Please Enter Password.');", True)
             Return
         Else
-            Dim query As String = "Select id, FirstName, LastName from employee11 where Email=@Email and Password=EncryptStringWithoutKey(@Password)"
+            Dim query As String = "Select id, FirstName, LastName,designation,Email,manager,PhoneNumber from employee11 where Email=@Email and Password=@Password"
             Cmd.CommandText = query
             Cmd.Parameters.AddWithValue("@Email", UserName.Text.Trim())
             Cmd.Parameters.AddWithValue("@Password", Password.Text.Trim())
@@ -33,7 +33,11 @@ Partial Class LoginForm
                 Session("ID") = Convert.ToString(dr("id"))
                 Session("FirstName") = Convert.ToString(dr("FirstName"))
                 Session("LastName") = Convert.ToString(dr("LastName"))
-                Session.Timeout = 20
+                Session("designation") = Convert.ToString(dr("designation"))
+                Session("Email") = Convert.ToString(dr("Email"))
+                Session("manager") = Convert.ToString(dr("manager"))
+                Session("PhoneNumber") = Convert.ToString(dr("PhoneNumber"))
+                Session.Timeout = 30
                 Response.Redirect("DashBorad.aspx")
             Else
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "alert", "alert('Please Enter Correct UserId/Password.');", True)
